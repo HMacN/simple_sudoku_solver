@@ -86,24 +86,6 @@ impl PuzzleAttempt
         return self.puzzle_boards[0].get_cell_at(row, col);
     }
 
-    pub fn infer_values_for_all_subsets(&mut self)
-    {
-        let mut changes_made: bool = true;
-
-        while changes_made
-        {
-            changes_made = false;
-
-            for subset in 0..27
-            {
-                if self.infer_for_single_subset(subset)
-                {
-                    changes_made = true;
-                }
-            }
-        }
-    }
-
     pub fn edit_cell_at(&mut self, row: usize, col: usize, new_value: u16) -> bool
     {
         let old_value: u16 = self.puzzle_boards[0].get_cell_at(row, col);
