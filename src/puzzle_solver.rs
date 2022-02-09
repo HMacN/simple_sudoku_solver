@@ -163,24 +163,6 @@ impl PuzzleAttempt
         return false;
     }
 
-    fn infer_for_single_subset(&mut self, subset: usize) -> bool
-    {
-        let edit_req: EditRequest = self.subset_handlers[subset].infer_final_value(self.get_puzzle_array());
-
-        if edit_req.get_make_this_edit()
-        {
-            if self.edit_cell_at(edit_req.get_row_number(), edit_req.get_col_number(), edit_req.get_new_value())
-            {
-                return true;
-            }
-
-            println!("PuzzleAttempt.infer_for_single_subset failed to make a successful edit!");
-            return false;
-        };
-
-        return false;
-    }
-
     fn find_index_of_subset_with_fewest_empty_cells(&self) -> usize
     {
         let mut index_of_subset_with_fewest_empty_cells: usize = 0;

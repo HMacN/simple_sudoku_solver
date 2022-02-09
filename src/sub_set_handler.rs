@@ -30,24 +30,6 @@ impl SubSetHandler
         return true;
     }
 
-    pub fn infer_final_value(&self, puzzle_array: [[u16; 9]; 9]) -> EditRequest
-    {
-        let mut edit_request_to_return: EditRequest = EditRequest::new_edit_request(0, 0, 0, false);
-
-        if self.only_one_empty_cell(puzzle_array)
-        {
-            let missing_cell_index: usize = self.find_first_empty_cell_index(puzzle_array);
-            let missing_cell_value: u16 = self.find_lowest_missing_value(puzzle_array);
-
-            edit_request_to_return = EditRequest::new_edit_request(
-                self.coords_of_cells[missing_cell_index][0],
-                self.coords_of_cells[missing_cell_index][1],
-                missing_cell_value, true);
-        };
-
-        return edit_request_to_return;
-    }
-
     pub fn get_empty_cell_count(&self, puzzle_array: [[u16; 9]; 9]) -> u16
     {
         let mut empty_cell_count: u16 = 0;
@@ -70,7 +52,7 @@ impl SubSetHandler
         let edit_request_containing_target_cell: EditRequest = EditRequest::new_edit_request(
             self.coords_of_cells[index_of_target_cell][0],
             self.coords_of_cells[index_of_target_cell][1],
-            value_of_guess, false);
+            value_of_guess);
 
         return edit_request_containing_target_cell;
     }
@@ -96,16 +78,6 @@ impl SubSetHandler
     fn get_contents_of_subset_cell(&self, puzzle_array: [[u16; 9]; 9], set_cell_num: usize) -> u16
     {
         return puzzle_array[self.coords_of_cells[set_cell_num][0]][self.coords_of_cells[set_cell_num][1]];
-    }
-
-    fn only_one_empty_cell(&self, puzzle_array: [[u16; 9]; 9]) -> bool
-    {
-        if self.get_empty_cell_count(puzzle_array) == 1
-        {
-            return true;
-        }
-
-        return false;
     }
 
     fn find_first_empty_cell_index(&self, puzzle_array: [[u16; 9]; 9]) -> usize

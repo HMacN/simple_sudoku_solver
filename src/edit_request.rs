@@ -3,19 +3,17 @@ pub (crate) struct EditRequest
     row_number: usize,
     col_number: usize,
     new_value: u16,
-    make_this_edit: bool,
 }
 
 impl EditRequest
 {
-    pub fn new_edit_request(row_number: usize, col_number: usize, new_value: u16, make_this_edit: bool) -> EditRequest
+    pub fn new_edit_request(row_number: usize, col_number: usize, new_value: u16) -> EditRequest
     {
         let new_edit_request: EditRequest = EditRequest
         {
             row_number,
             col_number,
             new_value,
-            make_this_edit,
         };
 
         return new_edit_request;
@@ -35,11 +33,6 @@ impl EditRequest
     {
         return self.new_value;
     }
-
-    pub fn get_make_this_edit(&self) -> bool
-    {
-        return self.make_this_edit;
-    }
 }
 
 impl Default for EditRequest
@@ -51,7 +44,6 @@ impl Default for EditRequest
             row_number: 0,
             col_number: 0,
             new_value: 0,
-            make_this_edit: false
         };
 
         return new_edit_request;
